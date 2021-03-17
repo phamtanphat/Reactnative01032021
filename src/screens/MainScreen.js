@@ -14,15 +14,16 @@ export default class MainScreen extends Component {
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-                <TouchableOpacity style={{
-                    backgroundColor: 'orange',
-                    width: 100,
-                    height: 100,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                }}>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: 'orange',
+                        width: 100,
+                        height: 100,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }}>
                     <View>
                         <Text>Click</Text>
                     </View>
