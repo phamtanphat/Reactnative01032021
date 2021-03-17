@@ -1,29 +1,34 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { Text, SafeAreaView } from 'react-native';
+import { Text, SafeAreaView, View, TouchableOpacity } from 'react-native';
 
 export default class MainScreen extends Component {
 
-    // shouldShowVn(isMemorized, vn) {
-    //     if (isMemorized) {
-    //         return '----';
-    //     } else {
-    //         return vn;
-    //     }
-    // }
-
     render() {
         // destructuring
-        const { vn, en, isMemorized } = { en: 'One', vn: 'Mot', isMemorized: true };
         return (
             <SafeAreaView style={{
                 flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
             }}>
-                <Text style={{ fontSize: 30 }}> {en} </Text>
-                <Text style={{ fontSize: 30 }}> {isMemorized ? "----" : vn} </Text>
+                <TouchableOpacity style={{
+                    backgroundColor: 'orange',
+                    width: 100,
+                    height: 100,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                }}>
+                    <View>
+                        <Text>Click</Text>
+                    </View>
+                </TouchableOpacity>
+
+
             </SafeAreaView>
         );
     }
