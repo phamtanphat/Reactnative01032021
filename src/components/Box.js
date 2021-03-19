@@ -3,7 +3,19 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
 export default class Box extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+  shouldComponentUpdate(newProps, newState) {
+    console.log(newState.count);
+    return false;
+  }
+
   render() {
+    console.log('Render');
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
         <Text
@@ -35,5 +47,9 @@ export default class Box extends Component {
         </View>
       </View>
     );
+  }
+  componentDidMount() {
+    console.log('componentDidMount');
+    this.setState({count: 1});
   }
 }
