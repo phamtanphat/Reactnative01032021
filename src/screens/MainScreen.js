@@ -31,44 +31,55 @@ export default class MainScreen extends Component {
         this.setState({ words: newWords });
     }
 
+    removeWord = (word) => {
+        const newWords = this.state.words.filter(item => {
+            if (item.id === word.id) {
+                return false;
+            }
+            return true;
+        });
+        this.setState({ words: newWords });
+    }
+
+    renderItemWord = (word) => {
+        return(
+            <View key={word.id}>
+                <View style={styles.groupWord}>
+                    <View style={styles.groupHorizontal}>
+                        <Text style={styles.textEn}>{word.en}</Text>
+                        <Text style={styles.textVn}>
+                            {word.isMemorized ? '----' : word.vn}
+                        </Text>
+                    </View>
+                    <View style={styles.groupHorizontal}>
+                        <TouchableOpacity
+                            onPress={() => this.toggleWord(word)}
+                            style={{
+                                ...styles.buttonMemorize,
+                                backgroundColor: word.isMemorized ? 'green' : 'red',
+                            }}>
+                            <Text style={styles.textMemorize}>
+                                {word.isMemorized ? 'Forgot' : 'Memorize'}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => this.removeWord(word)}
+                            style={styles.buttonRemove}>
+                            <Text style={styles.textRemove}>Remove</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+        )
+    }
+
     render() {
         return (
             <SafeAreaView style={{
                 flex: 1,
                 flexDirection: 'column',
             }}>
-                {
-                    this.state.words.map(word => {
-                        return (
-                            <View key={word.id}>
-                                <View style={styles.groupWord}>
-                                    <View style={styles.groupHorizontal}>
-                                        <Text style={styles.textEn}>{word.en}</Text>
-                                        <Text style={styles.textVn}>
-                                            {word.isMemorized ? '----' : word.vn}
-                                        </Text>
-                                    </View>
-                                    <View style={styles.groupHorizontal}>
-                                        <TouchableOpacity
-                                            onPress={() => this.toggleWord(word)}
-                                            style={{
-                                                ...styles.buttonMemorize,
-                                                backgroundColor: word.isMemorized ? 'green' : 'red',
-                                            }}>
-                                            <Text style={styles.textMemorize}>
-                                                {word.isMemorized ? 'Forgot' : 'Memorize'}
-                                            </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={styles.buttonRemove}>
-                                            <Text style={styles.textRemove}>Remove</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                        );
-                    })
-                }
+                {this.state.words.map(word => this.renderItemWord(word))}
             </SafeAreaView>
         );
     }
