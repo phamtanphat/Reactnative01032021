@@ -9,13 +9,12 @@ export default class Box extends Component {
       count: 0,
     };
   }
-  shouldComponentUpdate(newProps, newState) {
-    console.log(newState.count);
-    return false;
-  }
-
+  increase = () => {
+    this.setState({count: this.state.count + 1}, () => {
+      console.log(this.state.count);
+    });
+  };
   render() {
-    console.log('Render');
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
         <Text
@@ -25,10 +24,11 @@ export default class Box extends Component {
             fontSize: 20,
             marginBottom: 10,
           }}>
-          Count = 0
+          Count = {this.state.count}
         </Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <TouchableOpacity
+            onPress={() => this.increase()}
             style={{padding: 10, backgroundColor: 'green', borderRadius: 5}}>
             <Text>InCrease</Text>
           </TouchableOpacity>
@@ -49,7 +49,6 @@ export default class Box extends Component {
     );
   }
   componentDidMount() {
-    console.log('componentDidMount');
     this.setState({count: 1});
   }
 }
