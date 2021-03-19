@@ -18,6 +18,7 @@ export default class MainScreen extends Component {
             { id: 5, en: "Five", vn: "Năm", isMemorized: true },
         ];
 
+
         return (
             <SafeAreaView style={{
                 flex: 1,
