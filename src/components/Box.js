@@ -28,7 +28,7 @@ export default class Box extends Component {
         </Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <TouchableOpacity
-            onPress={() => this.increase()}
+            onPress={this.increase}
             style={{padding: 10, backgroundColor: 'green', borderRadius: 5}}>
             <Text>InCrease</Text>
           </TouchableOpacity>
@@ -47,8 +47,5 @@ export default class Box extends Component {
         </View>
       </View>
     );
-  }
-  componentDidMount() {
-    this.setState({count: 1});
   }
 }

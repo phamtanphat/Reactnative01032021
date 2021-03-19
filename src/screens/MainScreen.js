@@ -8,24 +8,37 @@ import screenDimension from '../helpers/screenDimension';
 
 export default class MainScreen extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            words: [
+                { id: 1, en: 'One', vn: 'Một', isMemorized: true },
+                { id: 2, en: 'Two', vn: 'Hai', isMemorized: true },
+                { id: 3, en: 'Three', vn: 'Ba', isMemorized: false },
+                { id: 4, en: 'Four', vn: 'Bốn', isMemorized: false },
+                { id: 5, en: 'Five', vn: 'Năm', isMemorized: true },
+            ],
+        };
+    }
+
+    toggleWord = (word) => {
+        const newWords = this.state.words.map(item => {
+            if (item.id === word.id) {
+                return { ...item, isMemorized: !item.isMemorized };
+            }
+            return item;
+        });
+        this.setState({ words: newWords });
+    }
+
     render() {
-
-        const word = [
-            { id: 1, en: "One", vn: "Một", isMemorized: true },
-            { id: 2, en: "Two", vn: "Hai", isMemorized: true },
-            { id: 3, en: "Three", vn: "Ba", isMemorized: false },
-            { id: 4, en: "Four", vn: "Bốn", isMemorized: false },
-            { id: 5, en: "Five", vn: "Năm", isMemorized: true },
-        ];
-
-
         return (
             <SafeAreaView style={{
                 flex: 1,
                 flexDirection: 'column',
             }}>
                 {
-                    word.map(word => {
+                    this.state.words.map(word => {
                         return (
                             <View key={word.id}>
                                 <View style={styles.groupWord}>
@@ -37,6 +50,7 @@ export default class MainScreen extends Component {
                                     </View>
                                     <View style={styles.groupHorizontal}>
                                         <TouchableOpacity
+                                            onPress={() => this.toggleWord(word)}
                                             style={{
                                                 ...styles.buttonMemorize,
                                                 backgroundColor: word.isMemorized ? 'green' : 'red',
