@@ -2,7 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
 import screenDimension from '../helpers/screenDimension';
 
 
@@ -19,6 +19,8 @@ export default class MainScreen extends Component {
                 { id: 5, en: 'Five', vn: 'Năm', isMemorized: true },
             ],
             shouldShowForm: false,
+            txtEn : '',
+            txtVn : '',
         };
     }
 
@@ -45,7 +47,25 @@ export default class MainScreen extends Component {
     toggleForm = () => {
         this.setState({ shouldShowForm: !this.state.shouldShowForm });
     };
-    
+
+    addWord = () =>{
+        const { txtEn, txtVn } = this.state;
+        if (txtEn.length <= 0 || txtVn.length <= 0) {
+            return alert("Bạn chưa nhập đủ thông tin")
+        }
+        const newWords = this.state.words.map(word => ({ ...word }));
+        const newWord = {
+            id: Math.random(),
+            en: txtEn,
+            vn: txtVn,
+            isMemorized: false
+        }
+        newWords.push(newWord);
+        this.setState({ words: newWords, txtEn: '', txtVn: '' }, () => {
+            this.textInputEn.clear();
+            this.textInputVn.clear();
+        });
+    }
     renderItemWord = (word) => {
         return(
             <View key={word.id}>
@@ -96,7 +116,9 @@ export default class MainScreen extends Component {
                         />
                     </View>
                     <View style={styles.containerTouchable}>
-                        <TouchableOpacity style={styles.touchableAddword}>
+                        <TouchableOpacity
+                            onPress={this.addWord}
+                            style={styles.touchableAddword}>
                             <Text style={styles.textTouchable}>Add word</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -125,7 +147,12 @@ export default class MainScreen extends Component {
                 flexDirection: 'column',
             }}>
                 {this.renderForm(this.state.shouldShowForm)}
-                {this.state.words.map(word => this.renderItemWord(word))}
+                <ScrollView>
+                    <>
+                        {this.state.words.map(word => this.renderItemWord(word))}
+                    </>
+                </ScrollView>
+                
             </View>
         );
     }
