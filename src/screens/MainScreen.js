@@ -70,7 +70,7 @@ export default class MainScreen extends Component {
                     </View>
                 </View>
             </View>
-        )
+        );
     }
 
     render() {
