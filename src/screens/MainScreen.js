@@ -2,7 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 import screenDimension from '../helpers/screenDimension';
 
 
@@ -18,6 +18,7 @@ export default class MainScreen extends Component {
                 { id: 4, en: 'Four', vn: 'Bốn', isMemorized: false },
                 { id: 5, en: 'Five', vn: 'Năm', isMemorized: true },
             ],
+            shouldShowForm: false,
         };
     }
 
@@ -41,6 +42,10 @@ export default class MainScreen extends Component {
         this.setState({ words: newWords });
     }
 
+    toggleForm = () => {
+        this.setState({ shouldShowForm: !this.state.shouldShowForm });
+    };
+    
     renderItemWord = (word) => {
         return(
             <View key={word.id}>
@@ -72,15 +77,56 @@ export default class MainScreen extends Component {
             </View>
         );
     }
+    renderForm = (shouldShowForm) => {
+        if (shouldShowForm) {
+            return (
+                <View>
+                    <View style={styles.containerTextInput}>
+                        <TextInput
+                            onChangeText={(text) => (this.state.txtEn = text)}
+                            placeholder="English"
+                            style={styles.textInput}
+                            ref={(refs) => (this.textInputEn = refs)}
+                        />
+                        <TextInput
+                            onChangeText={(text) => (this.state.txtVn = text)}
+                            placeholder="Vietnamese"
+                            style={styles.textInput}
+                            ref={(refs) => (this.textInputVn = refs)}
+                        />
+                    </View>
+                    <View style={styles.containerTouchable}>
+                        <TouchableOpacity style={styles.touchableAddword}>
+                            <Text style={styles.textTouchable}>Add word</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={this.toggleForm}
+                            style={styles.touchableCancel}>
+                            <Text style={styles.textTouchable}>Cancel</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            );
+        } else {
+            return (
+                <TouchableOpacity
+                    onPress={this.toggleForm}
+                    style={styles.buttonOpenForm}>
+                    <Text style={styles.textOpenForm}>+</Text>
+                </TouchableOpacity>
+            );
+        }
+    };
 
     render() {
         return (
-            <SafeAreaView style={{
+            <View style={{
                 flex: 1,
                 flexDirection: 'column',
             }}>
+                {this.renderForm(this.state.shouldShowForm)}
                 {this.state.words.map(word => this.renderItemWord(word))}
-            </SafeAreaView>
+            </View>
         );
     }
 }
@@ -129,5 +175,50 @@ const styles = StyleSheet.create({
     textRemove: {
         color: 'darkblue',
         fontSize: screenDimension.getWidth() / 22,
+    },
+    containerTextInput: {
+        width: '100%',
+        height: 150,
+        justifyContent: 'space-evenly',
+    },
+    textInput: {
+        borderWidth: 1,
+        height: 60,
+        fontSize: 20,
+        marginHorizontal: 10,
+        paddingHorizontal: 10,
+    },
+    touchableAddword: {
+        backgroundColor: '#218838',
+        padding: 15,
+        borderRadius: 10,
+    },
+    textTouchable: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: '500',
+    },
+    touchableCancel: {
+        backgroundColor: 'red',
+        padding: 15,
+        borderRadius: 10,
+    },
+    buttonOpenForm: {
+        marginHorizontal: 10,
+        height: 50,
+        backgroundColor: '#45B157',
+        borderRadius: 5,
+        marginBottom: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textOpenForm: {
+        color: 'white',
+        fontSize: 30,
+    },
+    containerTouchable: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginBottom: 10,
     },
 });
