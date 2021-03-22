@@ -51,15 +51,15 @@ export default class MainScreen extends Component {
     addWord = () =>{
         const { txtEn, txtVn } = this.state;
         if (txtEn.length <= 0 || txtVn.length <= 0) {
-            return alert("Bạn chưa nhập đủ thông tin")
+            return alert('Bạn chưa nhập đủ thông tin');
         }
         const newWords = this.state.words.map(word => ({ ...word }));
         const newWord = {
             id: Math.random(),
             en: txtEn,
             vn: txtVn,
-            isMemorized: false
-        }
+            isMemorized: false,
+        };
         newWords.push(newWord);
         this.setState({ words: newWords, txtEn: '', txtVn: '' }, () => {
             this.textInputEn.clear();
@@ -67,7 +67,7 @@ export default class MainScreen extends Component {
         });
     }
     renderItemWord = (word) => {
-        return(
+        return (
             <View key={word.id}>
                 <View style={styles.groupWord}>
                     <View style={styles.groupHorizontal}>
@@ -152,7 +152,7 @@ export default class MainScreen extends Component {
                         {this.state.words.map(word => this.renderItemWord(word))}
                     </>
                 </ScrollView>
-                
+
             </View>
         );
     }

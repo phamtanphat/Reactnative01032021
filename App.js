@@ -5,6 +5,7 @@ import MainScreen from './src/screens/MainScreen';
 import Box from './src/components/Box';
 import { SafeAreaView , Platform } from 'react-native';
 import Form from './src/components/Form';
+import Filter from './src/components/Filter';
 
 
 
