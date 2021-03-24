@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
 import screenDimension from '../helpers/screenDimension';
 import RNPickerSelect from 'react-native-picker-select';
-
+import Word from '../components/Word';
 
 export default class MainScreen extends Component {
 
@@ -171,11 +171,12 @@ export default class MainScreen extends Component {
             }}>
                 {this.renderForm(this.state.shouldShowForm)}
                 {this.renderFilter()}
-                <ScrollView>
+                {/* <ScrollView>
                     <>
                         {this.state.words.map(word => this.renderItemWord(word))}
                     </>
-                </ScrollView>
+                </ScrollView> */}
+                <Word data={this.state.words} />
 
             </View>
         );

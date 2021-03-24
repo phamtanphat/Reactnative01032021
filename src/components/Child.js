@@ -3,9 +3,6 @@ import React, {PureComponent} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
 export default class Child extends PureComponent {
-    shouldComponentUpdate check props là function có sự thay đổi thì render lại
-    PureComponent sẽ render lại khi props có giá trị mới (Không dùng nhiều với các giá
-    trị là object)
   render() {
     console.log('Render Child');
     const {onInCrease, onDesCrease, onReset} = this.props;
