@@ -13,7 +13,7 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex : 1 , marginTop : Platform.OS === 'android' ? 10 : 0}}>
-        <MainScreen/>
+        <Box/>
       </SafeAreaView>
     );
   }
