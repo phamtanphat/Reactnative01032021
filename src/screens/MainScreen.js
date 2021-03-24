@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
 import screenDimension from '../helpers/screenDimension';
+import RNPickerSelect from 'react-native-picker-select';
 
 
 export default class MainScreen extends Component {
@@ -21,6 +22,7 @@ export default class MainScreen extends Component {
             shouldShowForm: false,
             txtEn : '',
             txtVn : '',
+            filterMode: 'Show_All',
         };
     }
 
@@ -140,6 +142,21 @@ export default class MainScreen extends Component {
         }
     };
 
+    renderFilter = () => {
+        return (
+            <View style={styles.containerPickerStyle}>
+                <RNPickerSelect
+                    onValueChange={(value) => this.setState({ filterMode: value })}
+                    items={[
+                        { label: 'Show All', value: 'Show_All' },
+                        { label: 'Show Forgot', value: 'Show_Forgot' },
+                        { label: 'Show Memorized', value: 'Show_Memorized' },
+                    ]}
+                />
+            </View>
+        );
+    }
+
     render() {
         return (
             <View style={{
@@ -147,6 +164,7 @@ export default class MainScreen extends Component {
                 flexDirection: 'column',
             }}>
                 {this.renderForm(this.state.shouldShowForm)}
+                {this.renderFilter()}
                 <ScrollView>
                     <>
                         {this.state.words.map(word => this.renderItemWord(word))}
@@ -247,5 +265,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         marginBottom: 10,
+    },
+    containerPickerStyle: {
+        borderWidth: 1,
+        borderRadius: 1,
+        borderColor: 'black',
+        padding: 20,
+        marginHorizontal: 10,
+        marginBottom: 10,
+    },
+    pickerStyle: {
+        padding: 50,
     },
 });
