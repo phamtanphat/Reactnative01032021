@@ -13,8 +13,15 @@ export default class Box extends Component {
   onInCrease = () => {
     this.setState({count: this.state.count + 1});
   };
+  onDesCrease = () => {
+    this.setState({count: this.state.count - 1});
+  };
+  onReset = () => {
+    this.setState({count: 0});
+  };
 
   render() {
+    console.log('Render Box');
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
         <Text
@@ -26,7 +33,11 @@ export default class Box extends Component {
           }}>
           Count = {this.state.count}
         </Text>
-        <Child onInCrease={this.onInCrease} />
+        <Child
+          onInCrease={this.onInCrease}
+          onDesCrease={this.onDesCrease}
+          onReset={this.onReset}
+        />
       </View>
     );
   }
