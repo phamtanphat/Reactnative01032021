@@ -1,8 +1,18 @@
 import React, {Component} from 'react';
 import {Text, View, FlatList} from 'react-native';
 import ItemWord from './ItemWord';
+import PropTypes from 'prop-types';
 
 export default class Word extends Component {
+  static propTypes = {
+    data: PropTypes.array,
+    filterMode: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    data: [],
+    filterMode: false,
+  };
   render() {
     const {data} = this.props;
     return (

@@ -135,9 +135,7 @@ export default class MainScreen extends Component {
             }}>
                 {this.renderForm(this.state.shouldShowForm)}
                 {this.renderFilter()}
-                <Word
-                data={this.state.words}
-                filterMode={this.state.filterMode}/>
+                <Word/>
 
             </View>
         );
