@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, FlatList} from 'react-native';
+import ItemWord from './ItemWord';
 
 export default class Word extends Component {
   render() {
@@ -8,9 +9,7 @@ export default class Word extends Component {
       <FlatList
         data={data}
         keyExtractor={(item, index) => item.id.toString()}
-        renderItem={({item, index}) => {
-          return <Text>{item.en}</Text>;
-        }}
+        renderItem={({item, index}) => <ItemWord en={item.en} />}
       />
     );
   }

@@ -171,12 +171,9 @@ export default class MainScreen extends Component {
             }}>
                 {this.renderForm(this.state.shouldShowForm)}
                 {this.renderFilter()}
-                {/* <ScrollView>
-                    <>
-                        {this.state.words.map(word => this.renderItemWord(word))}
-                    </>
-                </ScrollView> */}
-                <Word data={this.state.words} />
+                <Word
+                data={this.state.words}
+                filterMode={this.state.filterMode}/>
 
             </View>
         );
