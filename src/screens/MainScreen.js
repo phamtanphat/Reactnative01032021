@@ -69,6 +69,12 @@ export default class MainScreen extends Component {
         });
     }
     renderItemWord = (word) => {
+        const { filterMode } = this.state;
+        if (filterMode === 'Show_Forgot' && !word.isMemorized){
+            return null;
+        } else if (filterMode === 'Show_Memorized' && word.isMemorized){
+            return null;
+        }
         return (
             <View key={word.id}>
                 <View style={styles.groupWord}>
