@@ -9,7 +9,9 @@ export default class Word extends Component {
       <FlatList
         data={data}
         keyExtractor={(item, index) => item.id.toString()}
-        renderItem={({item, index}) => <ItemWord en={item.en} />}
+        renderItem={({item, index}) => (
+          <ItemWord word={item} filterMode={this.props.filterMode} />
+        )}
       />
     );
   }
