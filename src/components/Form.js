@@ -24,6 +24,7 @@ export default class Form extends Component {
   };
 
   renderForm = (shouldShowForm) => {
+    const {onToggleForm} = this.props;
     if (shouldShowForm) {
       return (
         <View>
@@ -46,7 +47,7 @@ export default class Form extends Component {
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={this.toggleForm}
+              onPress={onToggleForm}
               style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
@@ -55,9 +56,7 @@ export default class Form extends Component {
       );
     } else {
       return (
-        <TouchableOpacity
-          onPress={this.toggleForm}
-          style={styles.buttonOpenForm}>
+        <TouchableOpacity onPress={onToggleForm} style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
       );

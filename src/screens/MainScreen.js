@@ -46,7 +46,7 @@ export default class MainScreen extends Component {
         this.setState({ words: newWords });
     }
 
-    toggleForm = () => {
+    onToggleForm = () => {
         this.setState({ shouldShowForm: !this.state.shouldShowForm });
     };
 
@@ -75,7 +75,9 @@ export default class MainScreen extends Component {
                 flex: 1,
                 flexDirection: 'column',
             }}>
-                <Form shouldShowForm={this.state.shouldShowForm} />
+                <Form
+                    onToggleForm={this.onToggleForm}
+                    shouldShowForm={this.state.shouldShowForm} />
                 <Filter filterMode={this.state.filterMode} />
                 <Word
                 data={this.state.words}
