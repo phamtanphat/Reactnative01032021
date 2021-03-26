@@ -99,7 +99,6 @@ export default class Form extends Component {
     }
   };
   render() {
-    console.log("Form");
     return this.renderForm(this.props.shouldShowForm);
   }
 }

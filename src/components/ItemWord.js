@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 export default class ItemWord extends Component {
   static propTypes = {
     word: PropTypes.object,
+    onToggleWord: PropTypes.func,
     filterMode: PropTypes.string,
   };
 
@@ -15,7 +16,7 @@ export default class ItemWord extends Component {
     filterMode: false,
   };
   renderItemWord = (word) => {
-    const {filterMode} = this.props;
+    const {filterMode, onToggleWord} = this.props;
     if (filterMode === 'Show_Forgot' && !word.isMemorized) {
       return null;
     } else if (filterMode === 'Show_Memorized' && word.isMemorized) {
@@ -32,7 +33,7 @@ export default class ItemWord extends Component {
           </View>
           <View style={styles.groupHorizontal}>
             <TouchableOpacity
-              onPress={() => this.toggleWord(word)}
+              onPress={() => onToggleWord(word)}
               style={{
                 ...styles.buttonMemorize,
                 backgroundColor: word.isMemorized ? 'green' : 'red',

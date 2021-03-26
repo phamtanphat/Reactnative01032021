@@ -2,7 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
+import { View } from 'react-native';
 import Word from '../components/Word';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
@@ -26,7 +26,7 @@ export default class MainScreen extends Component {
         };
     }
 
-    toggleWord = (word) => {
+    onToggleWord = (word) => {
         const newWords = this.state.words.map(item => {
             if (item.id === word.id) {
                 return { ...item, isMemorized: !item.isMemorized };
@@ -36,7 +36,7 @@ export default class MainScreen extends Component {
         this.setState({ words: newWords });
     }
 
-    removeWord = (word) => {
+    onRemoveWord = (word) => {
         const newWords = this.state.words.filter(item => {
             if (item.id === word.id) {
                 return false;
@@ -55,6 +55,9 @@ export default class MainScreen extends Component {
         newWords.push(newWord);
         this.setState({ words: newWords }, callback);
     }
+    onSetFilterMode = (filterMode) => {
+        this.setState({ filterMode });
+    }
 
     render() {
         return (
@@ -66,10 +69,13 @@ export default class MainScreen extends Component {
                     onAddWord={this.onAddWord}
                     onToggleForm={this.onToggleForm}
                     shouldShowForm={this.state.shouldShowForm} />
-                <Filter filterMode={this.state.filterMode} />
+                <Filter
+                    onSetFilterMode={this.onSetFilterMode}
+                    filterMode={this.state.filterMode} />
                 <Word
-                data={this.state.words}
-                filterMode={this.state.filterMode}/>
+                    onToggleWord={this.onToggleWord}
+                    data={this.state.words}
+                    filterMode={this.state.filterMode}/>
 
             </View>
         );

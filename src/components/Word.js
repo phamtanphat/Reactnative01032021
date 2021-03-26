@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 export default class Word extends Component {
   static propTypes = {
     data: PropTypes.array,
+    onToggleWord: PropTypes.func,
     filterMode: PropTypes.string,
   };
 
@@ -14,13 +15,17 @@ export default class Word extends Component {
     filterMode: false,
   };
   render() {
-    const {data} = this.props;
+    const {data, onToggleWord} = this.props;
     return (
       <FlatList
         data={data}
         keyExtractor={(item, index) => item.id.toString()}
         renderItem={({item, index}) => (
-          <ItemWord word={item} filterMode={this.props.filterMode} />
+          <ItemWord
+            word={item}
+            filterMode={this.props.filterMode}
+            onToggleWord={onToggleWord}
+          />
         )}
       />
     );
