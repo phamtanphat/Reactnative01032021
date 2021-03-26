@@ -6,6 +6,7 @@ import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet, TextInput, Scro
 import screenDimension from '../helpers/screenDimension';
 import RNPickerSelect from 'react-native-picker-select';
 import Word from '../components/Word';
+import Filter from '../components/Filter';
 
 export default class MainScreen extends Component {
 
@@ -22,7 +23,7 @@ export default class MainScreen extends Component {
             shouldShowForm: false,
             txtEn : '',
             txtVn : '',
-            filterMode: 'Show_All',
+            filterMode: 'Show_Forgot',
         };
     }
 
@@ -68,7 +69,7 @@ export default class MainScreen extends Component {
             this.textInputVn.clear();
         });
     }
-    
+
     renderForm = (shouldShowForm) => {
         if (shouldShowForm) {
             return (
@@ -134,8 +135,10 @@ export default class MainScreen extends Component {
                 flexDirection: 'column',
             }}>
                 {this.renderForm(this.state.shouldShowForm)}
-                {this.renderFilter()}
-                <Word/>
+                <Filter filterMode={this.state.filterMode}/> 
+                <Word
+                data={this.state.words}
+                filterMode={this.state.filterMode}/>
 
             </View>
         );

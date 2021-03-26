@@ -2,7 +2,18 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import screenDimension from '../helpers/screenDimension';
+import PropTypes from 'prop-types';
+
 export default class ItemWord extends Component {
+  static propTypes = {
+    word: PropTypes.object,
+    filterMode: PropTypes.string,
+  };
+
+  static defaultProps = {
+    data: {},
+    filterMode: false,
+  };
   renderItemWord = (word) => {
     const {filterMode} = this.props;
     if (filterMode === 'Show_Forgot' && !word.isMemorized) {

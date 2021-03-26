@@ -13,6 +13,7 @@ export default class Filter extends Component {
     return (
       <View style={styles.containerPickerStyle}>
         <RNPickerSelect
+          value={this.props.filterMode}
           onValueChange={(value) => this.setState({filterMode : value})}
           items={[
             {label: 'Show All', value: 'Show_All'},

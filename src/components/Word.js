@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export default class Word extends Component {
   static propTypes = {
     data: PropTypes.array,
-    filterMode: PropTypes.bool,
+    filterMode: PropTypes.string,
   };
 
   static defaultProps = {
