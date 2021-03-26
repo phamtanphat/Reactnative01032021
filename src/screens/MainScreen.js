@@ -2,11 +2,10 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { Text, SafeAreaView, View, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
-import screenDimension from '../helpers/screenDimension';
-import RNPickerSelect from 'react-native-picker-select';
+import { Text, View, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import Word from '../components/Word';
 import Filter from '../components/Filter';
+import Form from '../components/Form';
 
 export default class MainScreen extends Component {
 
@@ -23,7 +22,7 @@ export default class MainScreen extends Component {
             shouldShowForm: false,
             txtEn : '',
             txtVn : '',
-            filterMode: 'Show_Forgot',
+            filterMode: 'Show_All',
         };
     }
 
@@ -70,72 +69,14 @@ export default class MainScreen extends Component {
         });
     }
 
-    renderForm = (shouldShowForm) => {
-        if (shouldShowForm) {
-            return (
-                <View>
-                    <View style={styles.containerTextInput}>
-                        <TextInput
-                            onChangeText={(text) => (this.state.txtEn = text)}
-                            placeholder="English"
-                            style={styles.textInput}
-                            ref={(refs) => (this.textInputEn = refs)}
-                        />
-                        <TextInput
-                            onChangeText={(text) => (this.state.txtVn = text)}
-                            placeholder="Vietnamese"
-                            style={styles.textInput}
-                            ref={(refs) => (this.textInputVn = refs)}
-                        />
-                    </View>
-                    <View style={styles.containerTouchable}>
-                        <TouchableOpacity
-                            onPress={this.addWord}
-                            style={styles.touchableAddword}>
-                            <Text style={styles.textTouchable}>Add word</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={this.toggleForm}
-                            style={styles.touchableCancel}>
-                            <Text style={styles.textTouchable}>Cancel</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            );
-        } else {
-            return (
-                <TouchableOpacity
-                    onPress={this.toggleForm}
-                    style={styles.buttonOpenForm}>
-                    <Text style={styles.textOpenForm}>+</Text>
-                </TouchableOpacity>
-            );
-        }
-    };
-
-    renderFilter = () => {
-        return (
-            <View style={styles.containerPickerStyle}>
-                <RNPickerSelect
-                    onValueChange={(value) => this.setState({ filterMode: value })}
-                    items={[
-                        { label: 'Show All', value: 'Show_All' },
-                        { label: 'Show Forgot', value: 'Show_Forgot' },
-                        { label: 'Show Memorized', value: 'Show_Memorized' },
-                    ]}
-                />
-            </View>
-        );
-    }
-
     render() {
         return (
             <View style={{
                 flex: 1,
                 flexDirection: 'column',
             }}>
-                {this.renderForm(this.state.shouldShowForm)}
-                <Filter filterMode={this.state.filterMode}/> 
+                <Form shouldShowForm={this.state.shouldShowForm} />
+                <Filter filterMode={this.state.filterMode} />
                 <Word
                 data={this.state.words}
                 filterMode={this.state.filterMode}/>
@@ -144,62 +85,3 @@ export default class MainScreen extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    containerTextInput: {
-        width: '100%',
-        height: 150,
-        justifyContent: 'space-evenly',
-    },
-    textInput: {
-        borderWidth: 1,
-        height: 60,
-        fontSize: 20,
-        marginHorizontal: 10,
-        paddingHorizontal: 10,
-    },
-    touchableAddword: {
-        backgroundColor: '#218838',
-        padding: 15,
-        borderRadius: 10,
-    },
-    textTouchable: {
-        color: 'white',
-        fontSize: 20,
-        fontWeight: '500',
-    },
-    touchableCancel: {
-        backgroundColor: 'red',
-        padding: 15,
-        borderRadius: 10,
-    },
-    buttonOpenForm: {
-        marginHorizontal: 10,
-        height: 50,
-        backgroundColor: '#45B157',
-        borderRadius: 5,
-        marginBottom: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textOpenForm: {
-        color: 'white',
-        fontSize: 30,
-    },
-    containerTouchable: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        marginBottom: 10,
-    },
-    containerPickerStyle: {
-        borderWidth: 1,
-        borderRadius: 1,
-        borderColor: 'black',
-        padding: 20,
-        marginHorizontal: 10,
-        marginBottom: 10,
-    },
-    pickerStyle: {
-        padding: 50,
-    },
-});

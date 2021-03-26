@@ -1,8 +1,17 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import PropTypes from 'prop-types';
 
 export default class Filter extends Component {
+  static propTypes = {
+    filterMode: PropTypes.string,
+  };
+
+  static defaultProps = {
+    filterMode: '',
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +23,7 @@ export default class Filter extends Component {
       <View style={styles.containerPickerStyle}>
         <RNPickerSelect
           value={this.props.filterMode}
-          onValueChange={(value) => this.setState({filterMode : value})}
+          onValueChange={(value) => this.setState({filterMode: value})}
           items={[
             {label: 'Show All', value: 'Show_All'},
             {label: 'Show Forgot', value: 'Show_Forgot'},

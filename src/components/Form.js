@@ -8,14 +8,16 @@ import {
   StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 
 export default class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      shouldShowForm: false,
-    };
-  }
+  static propTypes = {
+    shouldShowForm: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    shouldShowForm: false,
+  };
 
   toggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
@@ -62,7 +64,7 @@ export default class Form extends Component {
     }
   };
   render() {
-    return this.renderForm(this.state.shouldShowForm);
+    return this.renderForm(this.props.shouldShowForm);
   }
 }
 
