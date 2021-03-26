@@ -6,6 +6,19 @@ import Box from './src/components/Box';
 import { SafeAreaView , Platform } from 'react-native';
 import Form from './src/components/Form';
 import Filter from './src/components/Filter';
+import { createStore } from 'redux';
+
+const store = createStore((state = 0 , action) => {
+  if (action.type === 'INCREASE') {
+    return state + 1;
+  }
+  return state;
+});
+
+console.log(store.getState());
+// Thay đổi store bằng cách gửi action
+store.dispatch({ type : 'INCREASE'});
+console.log(store.getState());
 
 
 

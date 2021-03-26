@@ -17,7 +17,7 @@ export default class ItemWord extends Component {
     filterMode: false,
   };
   renderItemWord = (word) => {
-    const { filterMode, onToggleWord, onRemoveWord} = this.props;
+    const {filterMode, onToggleWord, onRemoveWord} = this.props;
     if (filterMode === 'Show_Forgot' && !word.isMemorized) {
       return null;
     } else if (filterMode === 'Show_Memorized' && word.isMemorized) {
