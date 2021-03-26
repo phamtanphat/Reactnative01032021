@@ -11,6 +11,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 
 export default class Form extends Component {
+  shouldComponentUpdate(newProps, newState) {
+    if (newProps.shouldShowForm === this.props.shouldShowForm){
+      return false;
+    }
+    return true;
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -93,6 +99,7 @@ export default class Form extends Component {
     }
   };
   render() {
+    console.log("Form");
     return this.renderForm(this.props.shouldShowForm);
   }
 }
