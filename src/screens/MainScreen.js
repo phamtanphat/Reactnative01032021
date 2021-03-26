@@ -50,23 +50,10 @@ export default class MainScreen extends Component {
         this.setState({ shouldShowForm: !this.state.shouldShowForm });
     };
 
-    addWord = () =>{
-        const { txtEn, txtVn } = this.state;
-        if (txtEn.length <= 0 || txtVn.length <= 0) {
-            return alert('Bạn chưa nhập đủ thông tin');
-        }
+    onAddWord = (newWord , callback) =>{
         const newWords = this.state.words.map(word => ({ ...word }));
-        const newWord = {
-            id: Math.random(),
-            en: txtEn,
-            vn: txtVn,
-            isMemorized: false,
-        };
         newWords.push(newWord);
-        this.setState({ words: newWords, txtEn: '', txtVn: '' }, () => {
-            this.textInputEn.clear();
-            this.textInputVn.clear();
-        });
+        this.setState({ words: newWords }, callback);
     }
 
     render() {
@@ -76,6 +63,7 @@ export default class MainScreen extends Component {
                 flexDirection: 'column',
             }}>
                 <Form
+                    onAddWord={this.onAddWord}
                     onToggleForm={this.onToggleForm}
                     shouldShowForm={this.state.shouldShowForm} />
                 <Filter filterMode={this.state.filterMode} />

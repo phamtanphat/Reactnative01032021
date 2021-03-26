@@ -11,12 +11,40 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 
 export default class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      txtEn: '',
+      txtVn: '',
+    };
+  }
+
   static propTypes = {
     shouldShowForm: PropTypes.bool,
+    onToggleForm: PropTypes.func.isRequired,
+    onAddWord: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     shouldShowForm: false,
+  };
+
+  addWord = () => {
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      return alert('Bạn chưa nhập đủ thông tin');
+    }
+    const newWord = {
+      id: Math.random(),
+      en: txtEn,
+      vn: txtVn,
+      isMemorized: false,
+    };
+    this.props.onAddWord(newWord, () => {
+      this.setState({txtEn: '', txtVn: ''});
+      this.textInputEn.clear();
+      this.textInputVn.clear();
+    });
   };
 
   toggleForm = () => {
@@ -43,7 +71,9 @@ export default class Form extends Component {
             />
           </View>
           <View style={styles.containerTouchable}>
-            <TouchableOpacity style={styles.touchableAddword}>
+            <TouchableOpacity
+              onPress={this.addWord}
+              style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
