@@ -7,6 +7,7 @@ export default class Word extends Component {
   static propTypes = {
     data: PropTypes.array,
     onToggleWord: PropTypes.func,
+    onRemoveWord: PropTypes.func,
     filterMode: PropTypes.string,
   };
 
@@ -15,7 +16,7 @@ export default class Word extends Component {
     filterMode: false,
   };
   render() {
-    const {data, onToggleWord} = this.props;
+    const { data, onToggleWord, onRemoveWord} = this.props;
     return (
       <FlatList
         data={data}
@@ -25,6 +26,7 @@ export default class Word extends Component {
             word={item}
             filterMode={this.props.filterMode}
             onToggleWord={onToggleWord}
+            onRemoveWord={onRemoveWord}
           />
         )}
       />

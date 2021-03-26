@@ -8,6 +8,7 @@ export default class ItemWord extends Component {
   static propTypes = {
     word: PropTypes.object,
     onToggleWord: PropTypes.func,
+    onRemoveWord: PropTypes.func,
     filterMode: PropTypes.string,
   };
 
@@ -16,7 +17,7 @@ export default class ItemWord extends Component {
     filterMode: false,
   };
   renderItemWord = (word) => {
-    const {filterMode, onToggleWord} = this.props;
+    const { filterMode, onToggleWord, onRemoveWord} = this.props;
     if (filterMode === 'Show_Forgot' && !word.isMemorized) {
       return null;
     } else if (filterMode === 'Show_Memorized' && word.isMemorized) {
@@ -43,7 +44,7 @@ export default class ItemWord extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.removeWord(word)}
+              onPress={() => onRemoveWord(word)}
               style={styles.buttonRemove}>
               <Text style={styles.textRemove}>Remove</Text>
             </TouchableOpacity>

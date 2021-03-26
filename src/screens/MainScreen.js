@@ -2,7 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View , Alert } from 'react-native';
 import Word from '../components/Word';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
@@ -37,13 +37,31 @@ export default class MainScreen extends Component {
     }
 
     onRemoveWord = (word) => {
-        const newWords = this.state.words.filter(item => {
-            if (item.id === word.id) {
-                return false;
-            }
-            return true;
-        });
-        this.setState({ words: newWords });
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc muốn xoá hay không?',
+            [
+                {
+                    text : 'Huỷ',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Xoá',
+                    onPress : () => {
+                        const newWords = this.state.words.filter(item => {
+                            if (item.id === word.id) {
+                                return false;
+                            }
+                            return true;
+                        });
+                        this.setState({ words: newWords });
+                    },
+                },
+            ],
+            {cancelable : false}
+        );
+
+
     }
 
     onToggleForm = () => {
@@ -73,6 +91,7 @@ export default class MainScreen extends Component {
                     onSetFilterMode={this.onSetFilterMode}
                     filterMode={this.state.filterMode} />
                 <Word
+                    onRemoveWord={this.onRemoveWord}
                     onToggleWord={this.onToggleWord}
                     data={this.state.words}
                     filterMode={this.state.filterMode}/>
