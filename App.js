@@ -9,20 +9,21 @@ import Filter from './src/components/Filter';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const store = createStore((state = 0 , action) => {
-  if (action.type === 'INCREASE') {
-    return state + 1;
-  }
-  if (action.type === 'DECREASE'){
-    return state - 1;
-  }
-  if (action.type === 'RESET') {
-    return 0;
-  }
+const defaultStore = {
+  words: [
+    { id: 1, en: 'One', vn: 'Một', isMemorized: true },
+    { id: 2, en: 'Two', vn: 'Hai', isMemorized: true },
+    { id: 3, en: 'Three', vn: 'Ba', isMemorized: false },
+    { id: 4, en: 'Four', vn: 'Bốn', isMemorized: false },
+    { id: 5, en: 'Five', vn: 'Năm', isMemorized: true },
+  ],
+  shouldShowForm: false,
+  filterMode: 'Show_All',
+};
+
+const store = createStore((state = defaultStore , action) => {
   return state;
 });
-
-
 
 
 export default class App extends Component {
@@ -30,7 +31,7 @@ export default class App extends Component {
     return (
       <SafeAreaView style={{flex : 1 , marginTop : Platform.OS === 'android' ? 10 : 0}}>
         <Provider store={store}>
-          <Box />
+          <MainScreen />
         </Provider>
       </SafeAreaView>
     );
