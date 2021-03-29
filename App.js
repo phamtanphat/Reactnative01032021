@@ -8,6 +8,7 @@ import Form from './src/components/Form';
 import Filter from './src/components/Filter';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { act } from 'react-test-renderer';
 
 const defaultStore = {
   words: [
@@ -24,6 +25,12 @@ const defaultStore = {
 const store = createStore((state = defaultStore , action) => {
   if (action.type === 'TOGGLE_FORM'){
     return {...state , shouldShowForm : !state.shouldShowForm};
+  }
+  if (action.type === 'ADD_WORD'){
+    const newWord = action.newWord;
+    const newWords = state.words.map(word => ({ ...word }));
+    newWords.push(newWord);
+    return {...state , words : newWords};
   }
   return state;
 });

@@ -59,8 +59,6 @@ class MainScreen extends Component {
             ],
             {cancelable : false}
         );
-
-
     }
 
     onToggleForm = () => {
@@ -68,9 +66,8 @@ class MainScreen extends Component {
     };
 
     onAddWord = (newWord , callback) =>{
-        const newWords = this.state.words.map(word => ({ ...word }));
-        newWords.push(newWord);
-        this.setState({ words: newWords }, callback);
+        this.props.dispatch({type : 'ADD_WORD' , newWord});
+        callback();
     }
     onSetFilterMode = (filterMode) => {
         this.setState({ filterMode });
@@ -83,6 +80,7 @@ class MainScreen extends Component {
                 flexDirection: 'column',
             }}>
                 <Form
+                    onAddWord={this.onAddWord}
                     onToggleForm={this.onToggleForm}
                     shouldShowForm={this.props.shouldShowForm} />
                 <Filter
