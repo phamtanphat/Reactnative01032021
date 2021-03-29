@@ -6,8 +6,9 @@ import { View , Alert } from 'react-native';
 import Word from '../components/Word';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
+import { connect } from 'react-redux';
 
-export default class MainScreen extends Component {
+class MainScreen extends Component {
 
     constructor(props){
         super(props);
@@ -20,8 +21,6 @@ export default class MainScreen extends Component {
                 { id: 5, en: 'Five', vn: 'Năm', isMemorized: true },
             ],
             shouldShowForm: false,
-            txtEn : '',
-            txtVn : '',
             filterMode: 'Show_All',
         };
     }
@@ -100,3 +99,13 @@ export default class MainScreen extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        words : state.words ,
+        filterMode : state.filterMode ,
+        shouldShowForm : state.shouldShowForm,
+    };
+};
+
+export default connect(mapStateToProps)(MainScreen);

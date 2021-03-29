@@ -25,6 +25,9 @@ const store = createStore((state = defaultStore , action) => {
   return state;
 });
 
+// không dùng connect cho App vì khi thay đổi store nếu ảnh hưởng app
+// tất cả component sẽ bị re-render
+
 
 export default class App extends Component {
   render() {
