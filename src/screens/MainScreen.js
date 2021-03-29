@@ -64,7 +64,7 @@ class MainScreen extends Component {
     }
 
     onToggleForm = () => {
-        this.setState({ shouldShowForm: !this.state.shouldShowForm });
+        this.props.dispatch({ type: 'TOGGLE_FORM'});
     };
 
     onAddWord = (newWord , callback) =>{
@@ -83,17 +83,13 @@ class MainScreen extends Component {
                 flexDirection: 'column',
             }}>
                 <Form
-                    onAddWord={this.onAddWord}
                     onToggleForm={this.onToggleForm}
-                    shouldShowForm={this.state.shouldShowForm} />
+                    shouldShowForm={this.props.shouldShowForm} />
                 <Filter
-                    onSetFilterMode={this.onSetFilterMode}
-                    filterMode={this.state.filterMode} />
+                    filterMode={this.props.filterMode} />
                 <Word
-                    onRemoveWord={this.onRemoveWord}
-                    onToggleWord={this.onToggleWord}
-                    data={this.state.words}
-                    filterMode={this.state.filterMode}/>
+                    data={this.props.words}
+                    filterMode={this.props.filterMode}/>
 
             </View>
         );

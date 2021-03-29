@@ -22,6 +22,9 @@ const defaultStore = {
 };
 
 const store = createStore((state = defaultStore , action) => {
+  if (action.type === 'TOGGLE_FORM'){
+    return {...state , shouldShowForm : !state.shouldShowForm};
+  }
   return state;
 });
 
