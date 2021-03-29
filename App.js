@@ -35,6 +35,24 @@ const store = createStore((state = defaultStore , action) => {
   if (action.type === 'SET_FILTER_MODE'){
     return {...state , filterMode : action.filterMode};
   }
+  if (action.type === 'TOGGLE_WORD'){
+    const newWords = state.words.map(item => {
+      if (item.id === action.word.id) {
+        return { ...item, isMemorized: !item.isMemorized };
+      }
+      return item;
+    });
+    return {...state , words : newWords};
+  }
+  if (action.type === 'REMOVE_WORD'){
+    const newWords = state.words.filter(item => {
+      if (item.id === action.word.id) {
+        return false;
+      }
+      return true;
+    });
+    return { ...state, words: newWords };
+  }
   return state;
 });
 

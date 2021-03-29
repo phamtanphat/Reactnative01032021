@@ -10,29 +10,8 @@ import { connect } from 'react-redux';
 
 class MainScreen extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            words: [
-                { id: 1, en: 'One', vn: 'Một', isMemorized: true },
-                { id: 2, en: 'Two', vn: 'Hai', isMemorized: true },
-                { id: 3, en: 'Three', vn: 'Ba', isMemorized: false },
-                { id: 4, en: 'Four', vn: 'Bốn', isMemorized: false },
-                { id: 5, en: 'Five', vn: 'Năm', isMemorized: true },
-            ],
-            shouldShowForm: false,
-            filterMode: 'Show_All',
-        };
-    }
-
     onToggleWord = (word) => {
-        const newWords = this.state.words.map(item => {
-            if (item.id === word.id) {
-                return { ...item, isMemorized: !item.isMemorized };
-            }
-            return item;
-        });
-        this.setState({ words: newWords });
+        this.props.dispatch({ type: 'TOGGLE_WORD', word});
     }
 
     onRemoveWord = (word) => {
@@ -47,13 +26,7 @@ class MainScreen extends Component {
                 {
                     text: 'Xoá',
                     onPress : () => {
-                        const newWords = this.state.words.filter(item => {
-                            if (item.id === word.id) {
-                                return false;
-                            }
-                            return true;
-                        });
-                        this.setState({ words: newWords });
+                        this.props.dispatch({type : 'REMOVE_WORD' , word});
                     },
                 },
             ],
@@ -87,6 +60,8 @@ class MainScreen extends Component {
                     onSetFilterMode={this.onSetFilterMode}
                     filterMode={this.props.filterMode} />
                 <Word
+                    onRemoveWord={this.onRemoveWord}
+                    onToggleWord={this.onToggleWord}
                     data={this.props.words}
                     filterMode={this.props.filterMode}/>
 
