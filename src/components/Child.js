@@ -1,25 +1,25 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {PureComponent} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Child extends PureComponent {
+class Child extends PureComponent {
   render() {
     console.log('Render Child');
-    const {onInCrease, onDesCrease, onReset} = this.props;
     return (
       <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <TouchableOpacity
-          onPress={onInCrease}
+          onPress={() => this.props.dispatch({type: 'INCREASE'})}
           style={{padding: 10, backgroundColor: 'green', borderRadius: 5}}>
           <Text>InCrease</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={onDesCrease}
+          onPress={() => this.props.dispatch({ type: 'DECREASE' })}
           style={{padding: 10, backgroundColor: 'red', borderRadius: 5}}>
-          <Text>DesCrease</Text>
+          <Text>DeCrease</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={onReset}
+          onPress={() => this.props.dispatch({ type: 'RESET' })}
           style={{
             padding: 10,
             backgroundColor: 'yellow',
@@ -31,3 +31,5 @@ export default class Child extends PureComponent {
     );
   }
 }
+
+export default connect()(Child);
