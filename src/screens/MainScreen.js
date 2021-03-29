@@ -70,7 +70,7 @@ class MainScreen extends Component {
         callback();
     }
     onSetFilterMode = (filterMode) => {
-        this.setState({ filterMode });
+        this.props.dispatch({ type: 'SET_FILTER_MODE' , filterMode });
     }
 
     render() {
@@ -84,6 +84,7 @@ class MainScreen extends Component {
                     onToggleForm={this.onToggleForm}
                     shouldShowForm={this.props.shouldShowForm} />
                 <Filter
+                    onSetFilterMode={this.onSetFilterMode}
                     filterMode={this.props.filterMode} />
                 <Word
                     data={this.props.words}
