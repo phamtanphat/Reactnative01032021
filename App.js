@@ -7,6 +7,7 @@ import { SafeAreaView , Platform } from 'react-native';
 import Form from './src/components/Form';
 import Filter from './src/components/Filter';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 const store = createStore((state = 0 , action) => {
   if (action.type === 'INCREASE') {
@@ -15,10 +16,6 @@ const store = createStore((state = 0 , action) => {
   return state;
 });
 
-console.log(store.getState());
-// Thay đổi store bằng cách gửi action
-store.dispatch({ type : 'INCREASE'});
-console.log(store.getState());
 
 
 
@@ -26,7 +23,9 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex : 1 , marginTop : Platform.OS === 'android' ? 10 : 0}}>
-        <MainScreen/>
+        <Provider store={store}>
+          <Box />
+        </Provider>
       </SafeAreaView>
     );
   }
