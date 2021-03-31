@@ -27,7 +27,7 @@ class MainScreen extends Component {
                 {
                     text: 'Xoá',
                     onPress : () => {
-                        this.props.dispatch({type : 'REMOVE_WORD' , word});
+                        this.props.removeWord(word);
                     },
                 },
             ],
@@ -36,15 +36,15 @@ class MainScreen extends Component {
     }
 
     onToggleForm = () => {
-        this.props.dispatch({ type: 'TOGGLE_FORM'});
+        this.props.toggleForm();
     };
 
     onAddWord = (newWord , callback) =>{
-        this.props.dispatch({type : 'ADD_WORD' , newWord});
+        this.props.addWord(newWord);
         callback();
     }
     onSetFilterMode = (filterMode) => {
-        this.props.dispatch({ type: 'SET_FILTER_MODE' , filterMode });
+        this.props.setFilterMode(filterMode);
     }
 
     render() {
