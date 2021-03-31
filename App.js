@@ -2,10 +2,7 @@
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
 import MainScreen from './src/screens/MainScreen';
-import Box from './src/components/Box';
 import { SafeAreaView , Platform } from 'react-native';
-import Form from './src/components/Form';
-import Filter from './src/components/Filter';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
