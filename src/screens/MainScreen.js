@@ -7,11 +7,12 @@ import Word from '../components/Word';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
 import { connect } from 'react-redux';
+import * as actionCreators from '../redux/actions/actionCreators';
 
 class MainScreen extends Component {
 
     onToggleWord = (word) => {
-        this.props.dispatch({ type: 'TOGGLE_WORD', word});
+        this.props.toggleWord(word);
     }
 
     onRemoveWord = (word) => {
@@ -78,4 +79,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(MainScreen);
+export default connect(mapStateToProps, actionCreators )(MainScreen);

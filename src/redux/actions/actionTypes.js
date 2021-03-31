@@ -1,0 +1,3 @@
+const ACTION_TYPE_TOGGLE_WORD = 'TOGGLE_WORD';
+
+export default {ACTION_TYPE_TOGGLE_WORD};
