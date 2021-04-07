@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const defaultWords = [
   {id: 1, en: 'One', vn: 'Một', isMemorized: true},
@@ -8,6 +9,15 @@ const defaultWords = [
   {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
   {id: 5, en: 'Five', vn: 'Năm', isMemorized: true},
 ];
+
+export const fetchWords = createAsyncThunk(
+  'words/fetchWords',
+  async (param, thunkAPI) => {
+    console.log("Có")
+    console.log(JSON.stringify(thunkAPI));
+    return 'hihi';
+  },
+);
 
 const word = createSlice({
   name: 'words',
@@ -29,8 +39,18 @@ const word = createSlice({
       }
     },
   },
+  extraReducers: {
+    [fetchWords.pending]: (state, action) => {
+      console.log('Penđing');
+      return state;
+    },
+    [fetchWords.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      return state;
+    },
+  },
 });
 
 const {reducer, actions} = word;
-export const { toggleWord, addWord, removeWord} = actions;
+export const {toggleWord, addWord, removeWord} = actions;
 export default reducer;

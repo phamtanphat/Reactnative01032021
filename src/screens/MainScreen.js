@@ -8,10 +8,15 @@ import Filter from '../components/Filter';
 import Form from '../components/Form';
 import { connect } from 'react-redux';
 import { toggleWord, addWord, removeWord} from '../redux/slices/wordSlice';
+import { fetchWords} from '../redux/slices/wordSlice';
 import { toggleForm} from '../redux/slices/shouldShowFormSlice';
 import { setFilterMode} from '../redux/slices/filterModeSlice';
 
 class MainScreen extends Component {
+
+    componentDidMount(){
+        fetchWords();
+    }
 
     onToggleWord = (word) => {
         this.props.dispatch(toggleWord(word));
