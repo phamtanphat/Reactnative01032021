@@ -8,6 +8,8 @@ import Filter from '../components/Filter';
 import Form from '../components/Form';
 import { connect } from 'react-redux';
 import { toggleWord, addWord, removeWord} from '../redux/slices/wordSlice';
+import { toggleForm} from '../redux/slices/shouldShowFormSlice';
+import { setFilterMode} from '../redux/slices/filterModeSlice';
 
 class MainScreen extends Component {
 
@@ -36,7 +38,7 @@ class MainScreen extends Component {
     }
 
     onToggleForm = () => {
-        this.props.toggleForm();
+        this.props.dispatch(toggleForm());
     };
 
     onAddWord = (newWord , callback) =>{
@@ -44,7 +46,7 @@ class MainScreen extends Component {
         callback();
     }
     onSetFilterMode = (filterMode) => {
-        this.props.setFilterMode(filterMode);
+        this.props.dispatch(setFilterMode(filterMode));
     }
 
     render() {
