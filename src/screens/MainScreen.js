@@ -7,7 +7,7 @@ import Word from '../components/Word';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
 import { connect } from 'react-redux';
-import { toggleWord} from '../redux/slices/wordSlice';
+import { toggleWord, addWord, removeWord} from '../redux/slices/wordSlice';
 
 class MainScreen extends Component {
 
@@ -27,7 +27,7 @@ class MainScreen extends Component {
                 {
                     text: 'Xoá',
                     onPress : () => {
-                        this.props.removeWord(word);
+                        this.props.dispatch(removeWord(word));
                     },
                 },
             ],
@@ -40,7 +40,7 @@ class MainScreen extends Component {
     };
 
     onAddWord = (newWord , callback) =>{
-        this.props.addWord(newWord);
+        this.props.dispatch(addWord(newWord));
         callback();
     }
     onSetFilterMode = (filterMode) => {

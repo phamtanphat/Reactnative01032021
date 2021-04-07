@@ -14,14 +14,23 @@ const word = createSlice({
   initialState: defaultWords,
   reducers: {
     toggleWord: (state, action) => {
-      console.log(action.payload);
       const index = state.findIndex((word) => word.id === action.payload.id);
-      state[index].isMemorized = !state[index].isMemorized;
-      return state;
+      if (index !== -1) {
+        state[index].isMemorized = !state[index].isMemorized;
+      }
+    },
+    addWord: (state, action) => {
+      state.push(action.payload);
+    },
+    removeWord: (state, action) => {
+      const index = state.findIndex((word) => word.id === action.payload.id);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
     },
   },
 });
 
 const {reducer, actions} = word;
-export const {toggleWord} = actions;
+export const { toggleWord, addWord, removeWord} = actions;
 export default reducer;
