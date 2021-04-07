@@ -8,10 +8,11 @@ const defaultWords = [
 
 export default function wordsReducer(state = defaultWords, action) {
   if (action.type === 'ADD_WORD') {
-    const newWord = action.newWord;
-    const newWords = state.map((word) => ({...word}));
-    newWords.push(newWord);
-    return newWords;
+    // const newWord = action.newWord;
+    // const newWords = state.map((word) => ({...word}));
+    // newWords.push(newWord);
+    state.push(action.newWord);
+    return state;
   }
   if (action.type === 'TOGGLE_WORD') {
     const newWords = state.map((item) => {
