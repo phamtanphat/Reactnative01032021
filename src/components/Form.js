@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 
 export default class Form extends Component {
   shouldComponentUpdate(newProps, newState) {
-    if (newProps.shouldShowForm === this.props.shouldShowForm){
+    if (newProps.shouldShowForm === this.props.shouldShowForm) {
       return false;
     }
     return true;
@@ -40,13 +40,7 @@ export default class Form extends Component {
     if (txtEn.length <= 0 || txtVn.length <= 0) {
       return alert('Bạn chưa nhập đủ thông tin');
     }
-    const newWord = {
-      id: Math.random(),
-      en: txtEn,
-      vn: txtVn,
-      isMemorized: false,
-    };
-    this.props.onAddWord(newWord, () => {
+    this.props.onAddWord(txtEn, txtVn, () => {
       this.setState({txtEn: '', txtVn: ''});
       this.textInputEn.clear();
       this.textInputVn.clear();

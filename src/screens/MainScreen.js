@@ -7,8 +7,7 @@ import Word from '../components/Word';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
 import { connect } from 'react-redux';
-import { addWord, removeWord} from '../redux/slices/wordSlice';
-import { fetchWords, fetchToggleWord, fetchRemoveWord} from '../redux/slices/wordSlice';
+import { fetchWords, fetchToggleWord, fetchRemoveWord, fetchAddWord} from '../redux/slices/wordSlice';
 import { toggleForm} from '../redux/slices/shouldShowFormSlice';
 import { setFilterMode} from '../redux/slices/filterModeSlice';
 
@@ -48,8 +47,8 @@ class MainScreen extends Component {
         this.props.dispatch(toggleForm());
     };
 
-    onAddWord = (newWord , callback) =>{
-        this.props.dispatch(addWord(newWord));
+    onAddWord = (en , vn , callback) =>{
+        this.props.dispatch(fetchAddWord({en , vn}));
         callback();
     }
     onSetFilterMode = (filterMode) => {

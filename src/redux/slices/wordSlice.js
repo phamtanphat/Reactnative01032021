@@ -40,17 +40,32 @@ export const fetchRemoveWord = createAsyncThunk(
   },
 );
 
+export const fetchAddWord = createAsyncThunk(
+  'words/fetchAddWord',
+  async (params, thunkAPI) => {
+    try {
+      const {en, vn} = params;
+      const url = 'https://servernode01032021.herokuapp.com/word';
+      const response = await axios.post(url, {en, vn});
+      if (response.data.success) {
+        thunkAPI.dispatch(fetchWords());
+      }
+      return '';
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 const word = createSlice({
   name: 'words',
   initialState: [],
-  reducers: {
-    addWord: (state, action) => {
-      state.push(action.payload);
-    },
-    removeWord: (state, action) => {},
-  },
+  reducers: null,
   extraReducers: {
-    [fetchWords.fulfilled]: (state, action) => state.concat(action.payload),
+    [fetchWords.fulfilled]: (state, action) => {
+      state = [];
+      return state.concat(action.payload);
+    },
     [fetchToggleWord.fulfilled]: (state, action) => {
       const index = state.findIndex((word) => word._id === action.payload._id);
       if (index !== -1) {
