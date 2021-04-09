@@ -2,8 +2,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
-const Child = ({onInCrease}) => {
-  console.log('Child render');
+const Child = ({onInCrease, onDeCrease, onReset}) => {
   return (
     <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
       <TouchableOpacity
@@ -12,10 +11,12 @@ const Child = ({onInCrease}) => {
         <Text>InCrease</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={onDeCrease}
         style={{padding: 10, backgroundColor: 'red', borderRadius: 5}}>
         <Text>DeCrease</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={onReset}
         style={{
           padding: 10,
           backgroundColor: 'yellow',
