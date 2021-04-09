@@ -2,10 +2,12 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
-const Child = () => {
+const Child = ({onInCrease}) => {
+  console.log('Child render');
   return (
     <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
       <TouchableOpacity
+        onPress={onInCrease}
         style={{padding: 10, backgroundColor: 'green', borderRadius: 5}}>
         <Text>InCrease</Text>
       </TouchableOpacity>

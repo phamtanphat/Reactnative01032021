@@ -1,9 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import Child from './Child';
 
-const Box = ({count}) => {
+const Box = (props) => {
+  const [count, setCount] = useState(0);
+  const onInCrease = () => {
+    setCount(count + 1);
+  };
   return (
     <View style={{justifyContent: 'center', flex: 1}}>
       <Text
@@ -15,7 +19,7 @@ const Box = ({count}) => {
         }}>
         Count = {count}
       </Text>
-      <Child />
+      <Child onInCrease={onInCrease} />
     </View>
   );
 };
