@@ -7,8 +7,8 @@ import Word from '../components/Word';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
 import { connect } from 'react-redux';
-import { toggleWord, addWord, removeWord} from '../redux/slices/wordSlice';
-import { fetchWords} from '../redux/slices/wordSlice';
+import { addWord, removeWord} from '../redux/slices/wordSlice';
+import { fetchWords, fetchToggleWord, fetchRemoveWord} from '../redux/slices/wordSlice';
 import { toggleForm} from '../redux/slices/shouldShowFormSlice';
 import { setFilterMode} from '../redux/slices/filterModeSlice';
 
@@ -19,7 +19,9 @@ class MainScreen extends Component {
     }
 
     onToggleWord = (word) => {
-        this.props.dispatch(toggleWord(word));
+        const {dispatch} = this.props;
+        dispatch(fetchToggleWord({_id : word._id , isMemorized : !word.isMemorized}));
+
     }
 
     onRemoveWord = (word) => {
@@ -34,7 +36,7 @@ class MainScreen extends Component {
                 {
                     text: 'Xoá',
                     onPress : () => {
-                        this.props.dispatch(removeWord(word));
+                        this.props.dispatch(fetchRemoveWord({_id : word._id}));
                     },
                 },
             ],
