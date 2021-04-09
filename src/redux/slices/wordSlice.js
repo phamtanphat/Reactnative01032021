@@ -13,9 +13,13 @@ const defaultWords = [
 export const fetchWords = createAsyncThunk(
   'words/fetchWords',
   async (param, thunkAPI) => {
-    console.log("Có")
-    console.log(JSON.stringify(thunkAPI));
-    return 'hihi';
+    try {
+      const url = 'https://servernode01032021.herokuapp.com/word';
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   },
 );
 
@@ -40,13 +44,8 @@ const word = createSlice({
     },
   },
   extraReducers: {
-    [fetchWords.pending]: (state, action) => {
-      console.log('Penđing');
-      return state;
-    },
     [fetchWords.fulfilled]: (state, action) => {
-      console.log(action.payload);
-      return state;
+      state.push(action.payload);
     },
   },
 });

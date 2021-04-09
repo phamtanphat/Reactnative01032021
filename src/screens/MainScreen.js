@@ -15,7 +15,7 @@ import { setFilterMode} from '../redux/slices/filterModeSlice';
 class MainScreen extends Component {
 
     componentDidMount(){
-        fetchWords();
+        this.props.dispatch(fetchWords());
     }
 
     onToggleWord = (word) => {
