@@ -3,8 +3,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import Child from './Child';
 
-const Box = (props) => {
-  const {count} = props;
+const Box = ({count}) => {
   return (
     <View style={{justifyContent: 'center', flex: 1}}>
       <Text
