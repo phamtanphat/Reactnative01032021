@@ -24,7 +24,7 @@ export default class ItemWord extends Component {
       return null;
     }
     return (
-      <View key={word.id}>
+      <View key={word._id}>
         <View style={styles.groupWord}>
           <View style={styles.groupHorizontal}>
             <Text style={styles.textEn}>{word.en}</Text>

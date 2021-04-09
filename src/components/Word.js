@@ -20,7 +20,7 @@ export default class Word extends Component {
     return (
       <FlatList
         data={data}
-        keyExtractor={(item, index) => item.id.toString()}
+        keyExtractor={(item, index) => item._id.toString()}
         renderItem={({item, index}) => (
           <ItemWord
             word={item}
