@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 const Child = ({onInCrease, onDeCrease, onReset}) => {
+  console.log("Child render")
   return (
     <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
       <TouchableOpacity
@@ -28,4 +29,4 @@ const Child = ({onInCrease, onDeCrease, onReset}) => {
   );
 };
 
-export default Child;
+export default memo(Child);

@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import Child from './Child';
 
 const Box = (props) => {
   const [count, setCount] = useState(0);
   const onInCrease = () => {
     setCount(count + 1);
+    console.log(Math.random());
   };
   const onDeCrease = () => {
     setCount(count - 1);
@@ -26,15 +27,15 @@ const Box = (props) => {
   // }, [count]);
 
   // xử lý cho listener
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(count + 1);
-      console.log('interval');
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [count]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCount(count + 1);
+  //     console.log('interval');
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [count]);
 
   return (
     <View style={{justifyContent: 'center', flex: 1}}>
@@ -47,6 +48,11 @@ const Box = (props) => {
         }}>
         Count = {count}
       </Text>
+      <TouchableOpacity
+        style={{justifyContent: 'center', alignItems: 'center'}}
+        onPress={onInCrease}>
+        <Text>Random</Text>
+      </TouchableOpacity>
       <Child
         onInCrease={onInCrease}
         onDeCrease={onDeCrease}
